@@ -1,7 +1,9 @@
 package com.example.aigc_backend.service.impl;
 
 import com.example.aigc_backend.mapper.DetectionRecordMapper;
+import com.example.aigc_backend.mapper.FilesMapper;
 import com.example.aigc_backend.pojo.DetectionRecord;
+import com.example.aigc_backend.pojo.Files;
 import com.example.aigc_backend.service.DetectionRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +14,17 @@ import java.util.List;
 public class DetectionRecordServiceImpl implements DetectionRecordService {
     @Autowired
     private DetectionRecordMapper detectionRecordMapper;
+    @Autowired
+    private FilesMapper filesMapper;
     @Override
-    public Boolean addDetectionRecord(String name, String content, Double result) {
+    public Boolean addDetectionRecord(Integer fileId, Double result) {
+        Files file = filesMapper.getById(fileId);
         try {
-            detectionRecordMapper.insertRecord(name,content,result);
+            detectionRecordMapper.insertRecord(file.getName(), file.getContent(), result);
+            filesMapper.deleteById(fileId);
             return true;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }

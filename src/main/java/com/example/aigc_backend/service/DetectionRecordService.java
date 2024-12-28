@@ -6,7 +6,7 @@ import com.example.aigc_backend.pojo.Files;
 import java.util.List;
 
 public interface DetectionRecordService {
-    Boolean addDetectionRecord(String name, String content, Double result);
+    Boolean addDetectionRecord(Integer fileId, Double result);
     List<DetectionRecord> getDetectionRecordList();
     String getContentById(Integer id);
 }

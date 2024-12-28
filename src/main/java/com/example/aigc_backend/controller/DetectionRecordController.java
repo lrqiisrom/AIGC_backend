@@ -19,15 +19,14 @@ public class DetectionRecordController {
         List<DetectionRecord> filesList = detectionRecordService.getDetectionRecordList();
         return Result.success(filesList);
     }
-    @PostMapping("/addFiles")
-    public Result addRecord(@RequestBody Map<String, String> filesMap) {
-        String name = filesMap.get("name");
-        String content = filesMap.get("content");
+    @PostMapping("/addRecords")
+    public Result addRecord(@RequestBody Map<String, List<Integer>> recordMap) {
+        List<Integer> fileIdList = recordMap.get("fileIds");
+        System.out.println(fileIdList);
         Double result = 0.2;
-        if(detectionRecordService.addDetectionRecord(name,content,result)) {
-            return Result.success();
-        }else {
-            return Result.error("未知错误");
+        for (Integer fileId : fileIdList) {
+            if(!detectionRecordService.addDetectionRecord(fileId,result)) return Result.error("检测出现错误");
         }
+        return Result.success();
     }
 }
