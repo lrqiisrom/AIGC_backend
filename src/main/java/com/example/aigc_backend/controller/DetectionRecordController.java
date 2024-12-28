@@ -19,6 +19,16 @@ public class DetectionRecordController {
         List<DetectionRecord> filesList = detectionRecordService.getDetectionRecordList();
         return Result.success(filesList);
     }
+    @GetMapping("/getContent/{id}")
+    public Result<String> getContentById(@PathVariable(value = "id") Integer id) {
+        String res = detectionRecordService.getContentById(id);
+        if(res != null) {
+            return Result.success(res);
+        }
+        else {
+            return Result.error("查看失败");
+        }
+    }
     @PostMapping("/addRecords")
     public Result addRecord(@RequestBody Map<String, List<Integer>> recordMap) {
         List<Integer> fileIdList = recordMap.get("fileIds");
