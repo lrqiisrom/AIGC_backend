@@ -38,4 +38,9 @@ public class DetectionRecordServiceImpl implements DetectionRecordService {
     public String getContentById(Integer id) {
         return detectionRecordMapper.getContentById(id);
     }
+
+    @Override
+    public String getContentByIdFromFileList(Integer id) {
+        return filesMapper.getContentById(id);
+    }
 }

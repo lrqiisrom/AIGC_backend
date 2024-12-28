@@ -9,4 +9,5 @@ public interface DetectionRecordService {
     Boolean addDetectionRecord(Integer fileId, Double result);
     List<DetectionRecord> getDetectionRecordList();
     String getContentById(Integer id);
+    String getContentByIdFromFileList(Integer id);
 }
