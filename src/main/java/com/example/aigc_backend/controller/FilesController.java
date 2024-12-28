@@ -32,6 +32,16 @@ public class FilesController {
             return Result.error("未知错误");
         }
     }
+    @GetMapping("/getContent/{id}")
+    public Result<String> getContentById(@PathVariable(value = "id") Integer id) {
+        String res = filesService.getContentById(id);
+        if(res != null) {
+            return Result.success(res);
+        }
+        else {
+            return Result.error("查看失败");
+        }
+    }
 
     @PostMapping("/upload")
     public Result uploadFile(@RequestParam("file") MultipartFile file) {

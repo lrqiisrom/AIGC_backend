@@ -36,4 +36,13 @@ public class FilesServiceImpl implements FilesService {
             return false;
         }
     }
+
+    @Override
+    public String getContentById(Integer id) {
+        try {
+            return filesMapper.getContentById(id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
