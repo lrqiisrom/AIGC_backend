@@ -34,7 +34,6 @@ public class DetectionRecordController {
     @CrossOrigin
     @GetMapping("/ai/generate")
     public Map generate(@RequestParam(value = "message", defaultValue = "Tell me a joke") String message) {
-        message = "我会给你个文本，你需要帮我判断这些文本是否是AIGC的，给我一个表示内容是AIGC的概率。注意：只用给出概率（范围为（0，1）开区间），其他什么也别说。文本如下：\n i love xjtu";
         return Map.of("generation", this.chatModel.call(message));
     }
 

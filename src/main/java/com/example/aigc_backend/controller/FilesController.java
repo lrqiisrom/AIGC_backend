@@ -21,17 +21,7 @@ public class FilesController {
         List<Files> filesList = filesService.getFiles();
         return Result.success(filesList);
     }
-    @PostMapping("/addFiles")
-    public Result addFiles(@RequestBody Map<String, String> filesMap) {
-        String name = filesMap.get("name");
-        String content = filesMap.get("content");
-        Integer textnum = content.length();
-        if(filesService.addFiles(name,content,textnum)) {
-            return Result.success();
-        }else {
-            return Result.error("未知错误");
-        }
-    }
+
     @GetMapping("/getContent/{id}")
     public Result<String> getContentById(@PathVariable(value = "id") Integer id) {
         String res = filesService.getContentById(id);
@@ -46,6 +36,7 @@ public class FilesController {
     @PostMapping("/upload")
     public Result uploadFile(@RequestParam("file") MultipartFile file) {
         try {
+            System.out.println(file);
             byte[] bytes = file.getBytes();
             String fileContent = new String(bytes);
             String fileName = file.getOriginalFilename();
